@@ -1,0 +1,27 @@
+<html>
+
+<body>
+
+<form action="{{ url_for('serviceItemsAdd', service_id = service_id ) }}"
+method = 'POST' >
+
+
+	<p>New Service:</p>
+		<input type = 'text' size ='30' name = 'name'>
+
+<!-- <input type='submit' > -->
+
+<p>Description:</p>
+	<input type = 'text' size ='30' name = 'description'>
+	<!-- <input type='submit' > -->
+
+<p>Price:</p>
+	<input type = 'text' size ='30' name = 'price'>
+	<input type='submit' value='create'>	
+
+</form>
+
+
+
+</body>
+</html>	

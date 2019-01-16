@@ -1,0 +1,41 @@
+<html>
+<head>
+	<link rel=stylesheet type=text/css href = "{{url_for('static',filename='styles.css') }} " >
+</head>	
+
+<body>
+<div class = 'pane'>
+	<div class = 'header'>
+<h1>Neighbor Care by the Serendipitous Sisters</h1>
+</br></br>
+</div>
+<div>
+{% for service in services %}
+
+
+{% if service.id == 1 %}
+
+<h1><a href='{{url_for('ServiceItemsMenu', service_id = service.id) }}' >Parent Help</a></h1>
+<h2><a href='{{url_for('serviceItemsAdd', service_id = service.id) }}' >Add new service</a></h2>
+
+{% elif service.id == 2 %}
+
+<h1><a href='{{url_for('ServiceItemsMenu', service_id = service.id) }}' >Cat Care</a></h1>
+<h2><a href='{{url_for('serviceItemsAdd', service_id = service.id) }}' >Add new service</a></h2>
+
+
+{% elif service.id == 3 %}
+
+<h1><a href='{{url_for('ServiceItemsMenu', service_id = service.id) }}' >Dog walking and care</a></h1>
+<h2><a href='{{url_for('serviceItemsAdd', service_id = service.id) }}' >Add new service</a></h2>
+<!-- -->
+{% endif %}
+
+
+{% endfor %}
+</div>
+
+
+</body>
+
+</html>
