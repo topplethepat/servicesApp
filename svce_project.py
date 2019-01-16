@@ -42,7 +42,7 @@ def serviceItemsAdd(service_id):
 
 @app.route('/services/<int:service_id>/<int:item_id>/edit/', methods = ['GET', 'POST'])		
 def serviceItemsEdit(service_id, item_id):
-	eachItem = session.query(ServiceItems.filter_by(id = item_id).one())
+	eachItem = session.query(ServiceItems).filter_by(id = item_id)
 	
 
 	return render_template('services_edit.html', service_id = service_id, item_id = item_id, eachItem = e.id)
