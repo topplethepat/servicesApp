@@ -10,18 +10,35 @@ from sqlalchemy import create_engine
 
 Base = declarative_base()
 
+class User(Base):
+
+	__tablename__ = 'user'
+	id = Column(Integer, primary_key=True)
+	name = Column(String(250), nullable=False)
+	email = Column(String(250), nullable=False)
+	picture = Column(String(250))
+
 
 class Service(Base):
 
 	__tablename__ = 'service'
-	name = Column(
-	String(80), nullable = False)
-	id = Column(
-	Integer, primary_key = True)
 
-class ServiceItems(Base):
+	id = Column(Integer, primary_key = True)
+	name = Column(String(250), nullable = False)
+	user_id = Column(Integer,ForeignKey('user.id'))
+	user = relationship(User)
+	@property
+	def serialize(self):
+	   """Return object data in easily serializeable format"""
+	   return {
+		   'name'         : self.name,
+		   'id'           : self.id,
+	   }
 
-	__tablename__ = 'service_item'
+
+class TaskItem(Base):
+
+	__tablename__ = 'task_item'
 
 	name = Column(String(80),nullable = False)
 	id = Column(Integer, primary_key = True)
@@ -31,9 +48,22 @@ class ServiceItems(Base):
 	service_id = Column(
 		Integer, ForeignKey('service.id'))
 	service = relationship(Service)
+	user_id = Column(Integer,ForeignKey('user.id'))
+	user = relationship(User)
+	@property
+	def serialize(self):
+	   """Return object data in easily serializeable format"""
+	   return {
+		   'name'         : self.name,
+		   'animal'		   : self.animal,
+		   'description'         : self.description,
+		   'id'         : self.id,
+		   'price'         : self.price,
+	   }
 
-engine = create_engine(
-	'sqlite:///servicemenu.db')
+
+#engine = create_engine('sqlite:///servicemenu.db')
+engine = create_engine('sqlite:///servicemenuwithusers1.db')
 
 Base.metadata.create_all(engine) #adds classes as new tables
 

@@ -1,0 +1,27 @@
+<html>
+<head>
+	<link rel=stylesheet type=text/css href = "{{url_for('static',filename='styles.css') }} " >
+</head>	
+
+<body>
+	<div class = 'pane'>
+	<div class = 'header'>
+<h1>Neighbor Care by the SuperVisoring Sisters</h1>
+</br></br>
+</div>
+</div>
+
+<div>
+	{% for s in service %}
+	
+
+	 <h2>{{s.name}}</h2>
+
+	
+
+</div>
+
+{% endfor %}
+
+</body>
+</html>

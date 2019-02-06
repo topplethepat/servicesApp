@@ -1,19 +1,17 @@
 <html>
 
 <body>
-<h1> Edit Service Item </h1>
+<h1> <h1>Edit {{service.name}}</h1></h1>
 
-<form action="{{ url_for('serviceItemsEdit', service_id = service_id, item_id = e.id  ) }}"
+<form action="{{ url_for('editService', service_id = service.id) }}"
 method = 'POST' >
 	<p>Modify Service:</p>
-		<input type = 'text' size ='30' name = 'editname' placeholder = '{{e.name}}'>
+		<input type = 'text' size ='30' name = 'editname' placeholder = '{{service.name}}'>
 	<input type='submit' value='modify'>
 </form>
 
-<div>
-{% for e in eachItem %}
 
-{% if e.id == 1 %}
+
 
 </body>
 </html>
