@@ -1,17 +1,44 @@
 <html>
+<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	<!-- <link rel=stylesheet type=text/css href = "{{url_for('static',filename='styles.css') }} " > -->
+<meta charset="utf-8">	
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
 
+	background-image: url("/static/rose.jpg");
+
+}
+
+
+</style>
+</head>	
 <body>
-<h1> Edit {{service.name}}</h1>
+	<div class="container">
 
+<div class="row">
+
+
+<h1> Edit {{service.name}}</h1>
+</div>
+<div class="row">
 <form action="{{ url_for('editService', service_id = service.id) }}"
 method = 'POST' >
 	<p>Modify Service:</p>
-		<input type = 'text' size ='30' name = 'editname' placeholder = '{{service.name}}'>
+		<input type = 'text' size ='30' name = 'name' placeholder = '{{service.name}}'>
 	<input type='submit' value='modify'>
 </form>
 
 
 
-
+</div>
+</div>
 </body>
 </html>
