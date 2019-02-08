@@ -1,27 +1,64 @@
 <html>
 <head>
-	<link rel=stylesheet type=text/css href = "{{url_for('static',filename='styles.css') }} " >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	<!-- <link rel=stylesheet type=text/css href = "{{url_for('static',filename='styles.css') }} " > -->
+<meta charset="utf-8">	
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+
+	background-image: url("/static/poppies.jpg");
+
+}
+
+
+</style>
 </head>	
-
 <body>
-	<div class = 'pane'>
-	<div class = 'header'>
-<h1>Neighbor Care by the SuperVisoring Sisters</h1>
+	<div class="container">
+
+<div class="row">
+<div style="margin-left: 400px; margin-top: 150px; color: FF8C00;">
+
+
+<h1>Care Facts in Fairfax</h1>
+
 </br></br>
-</div>
-</div>
 
-<div>
-	{% for s in service %}
-	
+<h6><a style="color:white;" href='{{url_for("newService") }}' >Add new service</a></h6>	
+{% for service in services %}
 
-	 <h2>{{s.name}}</h2>
 
-	
+{% if service.id == 1 %}
 
-</div>
+<h2 ><a style="color:white;" href='{{url_for('showTask', service_id = service.id) }}' >Parent Help</a></h2>
+<h6><a style="color:white;" href='{{url_for("editService") }}' >Edit</a></h6>	
+
+{% elif service.id == 2 %}
+
+<h2><a style="color:white;"href='{{url_for('showTask', service_id = service.id) }}' >Cat Care</a></h2>
+<h6><a style="color:white;" href='{{url_for("editService") }}' >Edit</a></h6>	
+
+
+{% elif service.id == 3 %}
+
+<h2><a style="color:white;"href='{{url_for('showTask', service_id = service.id) }}' >Dog walking and care</a></h2>
+<h6><a style="color:white;" href='{{url_for("editService") }}' >Edit</a></h6>	
+
+<{% endif %}
+
 
 {% endfor %}
 
+</div>
+</div>
+
+</div>
 </body>
 </html>

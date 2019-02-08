@@ -24,37 +24,19 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-#JSON APIs to view service Information
-# @app.route('/service/<int:service_id>/task/JSON')
-# def serviceItemJSON(service_id):
-# 		service = session.query(Service).filter_by(id = service_id).one()
-# 		items = session.query(TaskItem).filter_by(service_id = service_id).all()
-# 		return jsonify(TaskItems=[i.serialize for i in items])
-
-
-	
-# @app.route('/service/<int:service_id>/task/<int:task_id>/JSON')
-# def serviceItemJSON(service_id, task_item_id):
-# 		Task_Item = session.query(TaskItem).filter_by(id = task_item_id).one()
-# 		return jsonify(Task_Item = Task_Item.serialize)
-
-# @app.route('/service/JSON')
-# def servicesJSON():
-# 		services = session.query(Service).all()
-# 		return jsonify(services= [r.serialize for r in services])
 
 
 #Show all services
 @app.route('/')
 @app.route('/service/')
 def showServices():
-	service = session.query(Service).all()
+	services = session.query(Service).all()
 
 	# if 'username' not in login_session:
 	# 	return render_template('publicservices.html', services = services)
 	# else:
 		
-	return render_template('show.html', service = service)
+	return render_template('show.html', services = services)
 
 #Create a new service
 @app.route('/service/new/', methods=['GET','POST'])
@@ -66,7 +48,7 @@ def newService():
 			session.commit()
 			return redirect(url_for('showServices'))
 	else:
-			return render_template('services_add.html')
+			return render_template('newService.html')
 
 #Edit a service
 @app.route('/service/<int:service_id>/edit/', methods = ['GET', 'POST'])
