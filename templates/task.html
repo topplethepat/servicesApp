@@ -42,7 +42,7 @@ body {
 								
 								<p style="color:white;">{{i.description}}</p>
 								<p style="color:white;">{{i.price}}</p>
-				<h6><a style="color:white;" href='{{url_for("editService", service_id = service.id) }}' >Edit</a></h6>				
+				<h6><a style="color:white;" href='{{url_for("editTaskItem", service_id = service.id,task_id=i.id) }}' >Edit</a></h6>				
 				<a href="{{url_for('deleteTaskItem', service_id = service.id, task_id=i.id)}}">
 				<button class="btn-default delete" >
 					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete

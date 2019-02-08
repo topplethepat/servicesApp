@@ -31,25 +31,26 @@ body {
 
 </br></br>
 
-<h6><a style="color:white;" href='{{url_for("newService") }}' >Add new service</a></h6>	
+<h6><a style="color:white;" href='{{url_for("newService") }}' >Add new service</a></h6>
+
 {% for service in services %}
 
 
 {% if service.id == 1 %}
 
 <h2 ><a style="color:white;" href='{{url_for('showTask', service_id = service.id) }}' >Parent Help</a></h2>
-	
+<h6><a style="color:white;" href='{{url_for("editService",service_id=service.id) }}' >Edit</a>	
 
 {% elif service.id == 2 %}
 
 <h2><a style="color:white;"href='{{url_for('showTask', service_id = service.id) }}' >Cat Care</a></h2>
-		
+<h6><a style="color:white;" href='{{url_for("editService",service_id=service.id) }}' >Edit</a>			
 
 
 {% elif service.id == 3 %}
 
 <h2><a style="color:white;"href='{{url_for('showTask', service_id = service.id) }}' >Dog walking and care</a></h2>
-	
+<h6><a style="color:white;" href='{{url_for("editService",service_id=service.id) }}' >Edit</a>		
 
 <{% endif %}
 
