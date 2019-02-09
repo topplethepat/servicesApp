@@ -17,6 +17,9 @@ import json
 from flask import make_response # converts response into object to send to client
 import requests
 
+CLIENT_ID = json.loads(
+	open('client_secrets.json', 'r').read())['web']['client_id']
+
 
 engine = create_engine('sqlite:///servicemenuwithusers1.db', connect_args={'check_same_thread': False}, echo=True)
 Base.metadata.bind = engine
@@ -183,11 +186,11 @@ def gdisconnect():
 def showServices():
 	services = session.query(Service).all()
 
-	# if 'username' not in login_session:
-	# 	return render_template('show_if_not_loggedIn.html', services = services)
-	# else:
+	if 'username' not in login_session:
+		return render_template('show_if_not_loggedIn.html', services = services)
+	else:
 		
-	return render_template('show.html', services = services)
+		return render_template('show.html', services = services)
 
 #Create a new service
 @app.route('/service/new/', methods=['GET','POST'])
