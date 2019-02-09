@@ -111,8 +111,8 @@ def editTaskItem(service_id, task_id):
 						editedItem.description = request.form['description']
 				if request.form['price']:
 						editedItem.price = request.form['price']
-				if request.form['animal']:
-						editedItem.course = request.form['animal']
+				# if request.form['animal']:
+				# 		editedItem.course = request.form['animal']
 				session.add(editedItem)
 				session.commit() 
 				flash('Task Item Successfully Edited')

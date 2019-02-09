@@ -31,31 +31,25 @@ body {
 
 </br></br>
 
-<h6><a style="color:white;" href='{{url_for("newService") }}' >Add new service</a></h6>
 
+</div></div>
 {% for service in services %}
-
-
-{% if service.id == 1 %}
-
-<h2 ><a style="color:white;" href='{{url_for('showTask', service_id = service.id) }}' >Parent Help</a></h2>
-<h6><a style="color:white;" href='{{url_for("editService",service_id=service.id) }}' >Edit</a>	
-
-{% elif service.id == 2 %}
-
-<h2><a style="color:white;"href='{{url_for('showTask', service_id = service.id) }}' >Cat Care</a></h2>
-<h6><a style="color:white;" href='{{url_for("editService",service_id=service.id) }}' >Edit</a>			
-
-
-{% elif service.id == 3 %}
-
-<h2><a style="color:white;"href='{{url_for('showTask', service_id = service.id) }}' >Dog walking and care</a></h2>
-<h6><a style="color:white;" href='{{url_for("editService",service_id=service.id) }}' >Edit</a>		
-
-<{% endif %}
+<a style="color:white;" href = "{{url_for('showTask', service_id = service.id)}}">
+			<div class="row">
+				<div class="col-md-1"></div>
+					<div class="col-md-10 ">
+						<h3 style= "margin-left:280px;">{{service.name}}</h3>
+						<h6><a style="color:white;margin-left:280px;" href='{{url_for("editService", service_id = service.id) }}' >Edit or</a>
+						<a style="color:white;" href = "{{url_for('deleteService', service_id = service.id)}}">Delete</a></h6>
+	
+					</div>
+				<div class="col-md-1"></div>
+			</div>
+		</a>
 
 
 {% endfor %}
+<h6><a style="color:white;margin-left:310px;" href='{{url_for("newService") }}' >Add new service</a></h6>
 
 </div>
 </div>
