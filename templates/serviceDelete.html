@@ -13,7 +13,7 @@
 <style>
 body {
 
-	background-image: url("/static/rose.jpg");
+	background-image: url("/static/Labyrinth.jpg");
 
 }
 
@@ -24,8 +24,8 @@ body {
 	<div class="container">
 
 <div class="row">
-<div style = "top-margin: 2000px;" >
-<h2> Are you sure you want to delete {{service.name}}? </h2>
+
+<h2 style = "color:white;top-margin: 500px;"> Are you sure you want to delete {{service.name}}? </h2>
 
 <form action="#" method = 'post'>
 
@@ -33,13 +33,11 @@ body {
 	<button type="submit" class="btn-default delete" id="submit">
 		<span>Delete</span></button>
 
-<a href = '{{url_for('showServices')}}'>
-		<button class="btn-default">
-		<span >Cancel</span></button>
-	</a>		
-</span>
-</button>
-</a>
+		<a style = "color:white;" href = "{{url_for('showServices')}}">Cancel</a>
+			
+
+
+
 </form>
 </div>
 </div>

@@ -13,7 +13,7 @@
 <style>
 body {
 
-	background-image: url("/static/poppies.jpg");
+	background-image: url("/static/scape.jpg");
 
 }
 
@@ -24,23 +24,24 @@ body {
 	<div class="container">
 
 <div class="row">
-<div style="margin-left: 400px; margin-top: 150px; color: FF8C00;">
+	<a style="color:green;" href="{{url_for('gdisconnect')}}">Logout</a>
+<div style="margin-left: 220px; margin-top: 125px; color: green;">
 
 
-<h1>Care Facts in Fairfax</h1>
+<h1>Neighborhood Care in Fairfax</h1>
 
-</br></br>
+</br>
 
 
 </div></div>
 {% for service in services %}
-<a style="color:white;" href = "{{url_for('showTask', service_id = service.id)}}">
+<a " href = "{{url_for('showTask', service_id = service.id)}}">
 			<div class="row">
 				<div class="col-md-1"></div>
 					<div class="col-md-10 ">
-						<h3 style= "margin-left:280px;">{{service.name}}</h3>
-						<h6><a style="color:white;margin-left:280px;" href='{{url_for("editService", service_id = service.id) }}' >Edit or</a>
-						<a style="color:white;" href = "{{url_for('deleteService', service_id = service.id)}}">Delete</a></h6>
+						<h3 style= "margin-left:330px;">{{service.name}}</h3>
+						<h6><a style="margin-left:330px;" href='{{url_for("editService", service_id = service.id) }}' >Edit or</a>
+						<a  href = "{{url_for('deleteService', service_id = service.id)}}">Delete</a></h6>
 	
 					</div>
 				<div class="col-md-1"></div>
@@ -49,7 +50,7 @@ body {
 
 
 {% endfor %}
-<h6><a style="color:white;margin-left:310px;" href='{{url_for("newService") }}' >Add new service</a></h6>
+<h5><a style="color:green; margin-left:340px;" href='{{url_for("newService") }}' >Add new service</a></h5>
 
 </div>
 </div>

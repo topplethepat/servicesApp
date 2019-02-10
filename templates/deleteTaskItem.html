@@ -1,14 +1,41 @@
+<html>
+<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	<!-- <link rel=stylesheet type=text/css href = "{{url_for('static',filename='styles.css') }} " > -->
+<meta charset="utf-8">	
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+
+	background-image: url("/static/lake.jpg");
+
+}
+
+
+</style>
+</head>	
+<body>
+	<div class="container">
+
+<div class="row">
+
 {% block content %}
 
 <h2> Are you sure you want to delete {{item.name}}? </h2>
 
 <form action="#" method = 'post'>
 
-	<button type="submit" class="btn btn-default delete" id="submit" type="submit">
+	<button type="submit" class="btn-default" id="submit" type="submit">
 	<span  aria-hidden="true"></span>Delete</button>
 	<a href = '{{url_for('showServices')}}'>
-		<button class="btn btn-default delete">
-		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel</button>
+		<button class="btn-default">
+		<span aria-hidden="true"></span> Cancel</button>
 	</a>
 
 </form>

@@ -13,7 +13,7 @@
 <style>
 body {
 
-	background-image: url("/static/rose.jpg");
+	background-image: url("/static/lake.jpg");
 
 }
 
@@ -37,12 +37,8 @@ method = 'POST' >
 	<div></div>
 	<button type="submit" class="btn-default" id="submit" type="submit">
 	<span ></span>Save</button>
-	<a href = "{{url_for('showServices')}}">
-	<button class="btn-default delete">
-	<span></span> Cancel</button></a>
-	<a href = "{{url_for('deleteService', service_id = service.id)}}">
-	<button class="btn-default delete">
-	<span></span>Delete</button></a>					
+	<a href = "{{url_for('showServices')}}"> Cancel</a>
+							
 					
 </form>
 
