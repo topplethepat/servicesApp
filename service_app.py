@@ -245,8 +245,20 @@ def gdisconnect():
     else:
         response = make_response(json.dumps('Failed to revoke token for given user.', 400))
         response.headers['Content-Type'] = 'application/json'
-        return response	
+        return response
 
+#JSON APIs to view Services Information
+
+@app.route('/service/<int:service_id>/task/JSON')
+def serviceTaskJSON(service_id):
+		service = session.query(Service).filter_by(id = service_id).one()
+		items = session.query(TaskItem).filter_by(service_id = service_id).all()
+		return jsonify(TaskItems=[i.serialize for i in items])
+		        	
+@app.route('/service/JSON')
+def servicesJSON():
+		services = session.query(Service).all()
+		return jsonify(services= [service.serialize for service in services])
 
 #Show all services
 @app.route('/')
