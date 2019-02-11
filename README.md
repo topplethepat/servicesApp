@@ -35,5 +35,9 @@ Populate the database:
 
 	python populate_svcs.py
 
+Run the script:
+
+	python service_app.py	
+
 Go to http://localhost:5000/login on your browser and login	
 
