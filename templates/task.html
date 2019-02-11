@@ -1,64 +1,66 @@
+
+<!DOCTYPE html>
 <html>
+
 <head>
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-	<!-- <link rel=stylesheet type=text/css href = "{{url_for('static',filename='styles.css') }} " > -->
-<meta charset="utf-8">	
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-
-	background-image: url("/static/redwoodbackyard.jpg");
-
-}
-</style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <!-- <link rel=stylesheet type=text/css href = "{{url_for('static',filename='styles.css') }} " > -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            background-image: url("/static/redwoodbackyard.jpg");
+        }
+    </style>
 </head>
-	
+
 <body>
-		<div class="container">
+    <div class="container">
 
-<div class="row">
-<div style="margin-left: 400px; margin-top: 100px;">
+        <div class="row">
+            <div style="margin-left: 400px; margin-top: 100px;">
 
-<h6> <a style="color:white;" href="{{url_for('showServices') }}" >Back to home page</a></h6>
-<a href="{{url_for('newTaskItem', service_id = service.id )}}">
-				<button class="btn-default" >
-					<p style="color:green;">Describe specific tasks</p>
-				</button>
-			</a>
-</br>
-				
-</br>
-					{% for i in items %}
-					<div class="col-md-12">
-							
-								<h3 style="color:white;">{{i.name}}</h3>
-								
-								<p style="color:white;">{{i.description}}</p>
-								<p style="color:white;">{{i.price}}</p>
-				
+                <h6> <a style="color:white;" href="{{url_for('showServices') }}" >Back to home page</a></h6>
+                <a href="{{url_for('newTaskItem', service_id = service.id )}}">
+                    <button class="btn-default">
+                        <p style="color:green;">Add new task</p>
+                    </button>
+                </a>
+                </br>
 
-				<a href='{{url_for("editTaskItem", service_id = service.id,task_id=i.id) }}'>
-				<button type="submit" class="btn-default" >
-					<span aria-hidden="true"></span>Edit</button></a>
+                </br>
+                {% for i in items %}
+                <div class="col-md-12">
 
-				<a href="{{url_for('deleteTaskItem', service_id = service.id, task_id=i.id)}}">
-				<button class="btn-default delete" >
-					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete
-				</button></a></div>
-							
-						
-					{% endfor %}
-		
-			
-</div>
-</div>
-</div>
+                    <h3 style="color:white;">{{i.name}}</h3>
+
+                    <p style="color:white;">{{i.description}}</p>
+                    <p style="color:white;">{{i.price}}</p>
+
+                    <a href='{{url_for("editTaskItem", service_id = service.id,task_id=i.id) }}'>
+                        <button type="submit" class="btn-default">
+                            <span aria-hidden="true"></span>Edit</button>
+                    </a>
+
+                    <a href="{{url_for('deleteTaskItem', service_id = service.id, task_id=i.id)}}">
+                        <button class="btn-default delete">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete
+                        </button>
+                    </a>
+                </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

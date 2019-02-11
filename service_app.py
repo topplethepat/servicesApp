@@ -189,7 +189,7 @@ def servicesJSON():
 		services = session.query(Service).all()
 		return jsonify(services= [service.serialize for service in services])
 
-#Show all services
+#Show all services, different views per whether user is logged in or not
 @app.route('/')
 @app.route('/service/')
 def showServices():
@@ -226,7 +226,7 @@ def editService(service_id):
 		return render_template('services_edit.html', service = editedService)
 
 
-#Delete a service
+#Delete a service - not used in application currently but may add later
 @app.route('/service/<int:service_id>/delete/', methods = ['GET','POST'])
 def deleteService(service_id):
 	serviceToDelete = session.query(Service).filter_by(id = service_id).one()

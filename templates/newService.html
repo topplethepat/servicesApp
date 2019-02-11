@@ -1,50 +1,42 @@
+<!DOCTYPE html>
 <html>
+
 <head>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-	<!-- <link rel=stylesheet type=text/css href = "{{url_for('static',filename='styles.css') }} " > -->
-<meta charset="utf-8">	
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-
-	background-image: url("/static/Tam.jpg");
-	background-repeat: repeat-x;
-
-}
-</style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+   
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            background-image: url("/static/Tam.jpg");
+            background-repeat: repeat-x;
+        }
+    </style>
 </head>
 
 <body>
-	<div class="container">
+    <div class="container">
 
-<div class="row" style="color:white;margin-left: 400px;margin-top:75px;">
+        <div class="row" style="color:white;margin-left: 400px;margin-top:75px;">
 
-<form action="#" method = "post">
+            <form action="#" method="post">
 
+                <p>New Service:</p>
+                <input type='text' size='30' name='name'>
 
-	<p>New Service:</p>
-		<input type = 'text' size ='30' name = 'name'>
+                <input type='submit' value='create'>
 
-<!-- <input type='submit' > -->
-<!-- 
-<p>Description:</p>
-	<input type = 'text' size ='30' name = 'description'>
-	<input type='submit' >
+            </form>
 
-<p>Price:</p>
-	<input type = 'text' size ='30' name = 'price'> -->
-	<input type='submit' value='create'>	
-
-</form>
-
-</div>
-</div>
+        </div>
+    </div>
 
 </body>
-</html>	
+
+</html>
