@@ -20,11 +20,13 @@ CLIENT_ID = json.loads(
 	open('client_secrets.json', 'r').read())['web']['client_id']
 
 engine = create_engine(
-	'sqlite:///servicemenuwithusers1.db', connect_args={'check_same_thread': False}, echo=True)
+	'sqlite:///servicemenuwithusers1.db',
+	connect_args={'check_same_thread': False}, echo=True)
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
+
 
 # Create anti-forgery state token
 @app.route('/login')
@@ -145,18 +147,19 @@ def getUserID(email):
     except:
         return None	
 
+
 @app.route('/gdisconnect')
 def gdisconnect():
     access_token = login_session.get('access_token')
     if access_token is None:
         print 'Access Token is None'
-        response = make_response(json.dumps('Current user not connected.'), 401)
+        response = make_response(json.dumps('Current user not connected.'),401)
         response.headers['Content-Type'] = 'application/json'
         return response
-    print 'In gdisconnect access token is %s', access_token
+    print 'In gdisconnect access token is %s',access_token
     print 'User name is: '
     print login_session['username']
-    url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % login_session['access_token']
+    url='https://accounts.google.com/o/oauth2/revoke?token=%s' % login_session['access_token']
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
     print 'result is '
@@ -171,11 +174,12 @@ def gdisconnect():
         response.headers['Content-Type'] = 'application/json'
         return response
     else:
-        response = make_response(json.dumps('Failed to revoke token for given user.', 400))
+        response = make_response(json.dumps('Failed to revoke user token.', 400))
         response.headers['Content-Type'] = 'application/json'
         return response
 
 # JSON APIs to view Services Information
+
 
 @app.route('/service/<int:service_id>/task/JSON')
 def serviceTaskJSON(service_id):
