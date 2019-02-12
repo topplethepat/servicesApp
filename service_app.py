@@ -188,6 +188,7 @@ def serviceTaskJSON(service_id):
 		items = session.query(TaskItem).filter_by(service_id = service_id).all()
 		return jsonify(TaskItems=[i.serialize for i in items])
 
+
 @app.route('/service/JSON')
 def servicesJSON():
 		services = session.query(Service).all()
@@ -224,14 +225,14 @@ def editService(service_id):
 	if request.method == 'POST' and 'username' in login_session:
 			if request.form['name']:
 				editedService.name = request.form['name']
-				#flash('service Successfully Edited %s' % editedService.name)
+				# flash('service Successfully Edited %s' % editedService.name)
 				return redirect(url_for('showServices'))
 	else:
 		return render_template('services_edit.html', service = editedService)
 
 
 # Delete a service - not used in application currently but may add later
-@app.route('/service/<int:service_id>/delete/', methods = ['GET','POST'])
+@app.route('/service/<int:service_id>/delete/', methods = ['GET', 'POST'])
 def deleteService(service_id):
 	serviceToDelete = session.query(Service).filter_by(id = service_id).one()
 	if request.method == 'POST' and 'username' in login_session:
@@ -251,7 +252,6 @@ def showTask(service_id):
 		return render_template('task.html', items = items, service = service)
 		 
 
-
 # Create a new Task item
 @app.route('/service/<int:service_id>/task/new/',methods=['GET','POST'])
 def newTaskItem(service_id):
@@ -262,7 +262,7 @@ def newTaskItem(service_id):
 				price = request.form['price'], service_id = service_id)
 			session.add(newItem)
 			session.commit()
-			#flash('New Task %s Item Successfully Created' % (newItem.name))
+			# flash('New Task %s Item Successfully Created' % (newItem.name))
 			return redirect(url_for('showTask', service_id = service_id))
 	else:
 			return render_template('newTaskItem.html', service_id = service_id)
