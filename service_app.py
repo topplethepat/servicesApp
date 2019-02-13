@@ -264,7 +264,8 @@ def newTaskItem(service_id):
 	if request.method == 'POST':
 			newItem = TaskItem(
 				name = request.form['name'], description = request.form['description'], 
-				price = request.form['price'], service_id = service_id)
+				price = request.form['price'], service_id = service_id,
+				user_id = login_session['user_id'])
 			session.add(newItem)
 			session.commit()
 			# flash('New Task %s Item Successfully Created' % (newItem.name))
