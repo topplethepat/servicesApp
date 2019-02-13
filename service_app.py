@@ -209,7 +209,8 @@ def showServices():
 @app.route('/service/new/', methods=['GET','POST'])
 def newService():
 	if request.method == 'POST':
-			newService = Service(name = request.form['name'])
+			newService = Service(name = request.form['name'],
+				user_id=login_session['user_id'])
 			session.add(newService)
 			#flash('New service %s Successfully Created' % newService.name)
 			session.commit()
@@ -250,6 +251,7 @@ def showTask(service_id):
 		creator = getUserInfo(service.user_id)
 		items = session.query(TaskItem).filter_by(service_id = service_id).all()
 		if 'username' not in login_session or creator.id != login_session['user_id']:
+		#if 'username' not in login_session:	
 			return render_template('task_notLoggedIn.html', items = items, service = service, creator = creator)
 		else:
 			return render_template('task.html', items = items, service = service, creator = creator)
