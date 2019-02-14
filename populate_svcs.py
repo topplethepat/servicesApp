@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from my_databasesetup import Service, Base, TaskItem, User
 
 #engine = create_engine('sqlite:///servicemenu.db')
-engine = create_engine('sqlite:///servicemenuwithusers1.db')
+engine = create_engine('sqlite:///servicemenuwithusers2.db')
 # Bind the engine to the metadata of the Base class so that the
 # declaratives can be accessed through a DBSession instance
 Base.metadata.bind = engine

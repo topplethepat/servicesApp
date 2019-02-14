@@ -21,7 +21,7 @@ CLIENT_ID = json.loads(
 	open('client_secrets.json', 'r').read())['web']['client_id']
 
 engine = create_engine(
-	'sqlite:///servicemenuwithusers1.db',
+	'sqlite:///servicemenuwithusers2.db',
 	connect_args={'check_same_thread': False}, echo=True)
 Base.metadata.bind = engine
 

@@ -63,7 +63,7 @@ class TaskItem(Base):
 
 
 #engine = create_engine('sqlite:///servicemenu.db')
-engine = create_engine('sqlite:///servicemenuwithusers1.db')
+engine = create_engine('sqlite:///servicemenuwithusers2.db')
 
 Base.metadata.create_all(engine) #adds classes as new tables
 
