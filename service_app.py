@@ -295,7 +295,7 @@ def editTaskItem(service_id, task_id):
 		if 'username' not in login_session:
 			return redirect('showLogin')
 		if editedItem.user_id != login_session['user_id']:
-			flash("You can't edit this since you didn't create it.")	
+			return render_template('can_notEdit.html')	
 		if request.method == 'POST':
 				if request.form['name']:
 						editedItem.name = request.form['name']
