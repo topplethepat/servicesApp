@@ -208,32 +208,36 @@ def showServices():
 # Create a new service
 @app.route('/service/new/', methods=['GET','POST'])
 def newService():
-	if 'username' not in login_session:
-		flash("Please log in to continue.")
-		return redirect(url_for('showLogin'))
+	
 	if request.method == 'POST':
-			newService = Service(name = request.form['name'],
-				user_id=login_session['user_id'])
-			session.add(newService)
-			#flash('New service %s Successfully Created' % newService.name)
-			session.commit()
-			return redirect(url_for('showServices'))
+		if 'username' not in login_session:
+			flash("Please log in to continue.")
+			return redirect(url_for('showLogin'))
+		newService = Service(name = request.form['name'],
+			user_id=login_session['user_id'])
+		session.add(newService)
+		# flash('New service %s Successfully Created' % newService.name)
+		session.commit()
+		return redirect(url_for('showServices'))
 	else:
-			return render_template('newService.html')
+		return render_template('newService.html')
 
 # Edit a service
 @app.route('/service/<int:service_id>/edit/', methods = ['GET', 'POST'])
 def editService(service_id):
 	if 'username' not in login_session:
-		flash("Please log in to continue.")
+		flash("Please login to continue")
 		return redirect(url_for('showLogin'))
 	editedService = session.query(Service).filter_by(id = service_id).one()
-	if request.method == 'POST':
+	if login_session['user_id'] != editedService.user_id:
+		return render_template('can_notEdit.html')
+	if request.method == 'POST' and login_session['user_id'] == editedService.user_id:
 			if request.form['name']:
 				editedService.name = request.form['name']
 				# flash('service Successfully Edited %s' % editedService.name)
 				return redirect(url_for('showServices'))
 	else:
+		#if editedService.user_id == login_session['user_id']:
 		return render_template('services_edit.html', service = editedService)
 
 
@@ -241,13 +245,14 @@ def editService(service_id):
 @app.route('/service/<int:service_id>/delete/', methods = ['GET', 'POST'])
 def deleteService(service_id):
 	serviceToDelete = session.query(Service).filter_by(id = service_id).one()
-	if request.method == 'POST':
+	if request.method == 'POST' and creator.id == login_session['user_id']:
 		session.delete(serviceToDelete)
 		# flash('%s Successfully Deleted' % serviceToDelete.name)
 		session.commit()
 		return redirect(url_for('showServices', service_id = service_id))
 	else:
-		return render_template('serviceDelete.html',service = serviceToDelete)
+		if creator.id == login_session['user_id']:
+			return render_template('serviceDelete.html',service = serviceToDelete)
 
 # Show a service Task
 @app.route('/service/<int:service_id>/')
@@ -256,11 +261,11 @@ def showTask(service_id):
 		service = session.query(Service).filter_by(id = service_id).one()
 		creator = getUserInfo(service.user_id)
 		items = session.query(TaskItem).filter_by(service_id = service_id).all()
-		if 'username' not in login_session or creator.id != login_session['user_id']:
-			flash("Please log in to continue.")
-			return redirect(url_for('showLogin'))
-		#if 'username' not in login_session:	
-			#return render_template('task_notLoggedIn.html', items = items, service = service, creator = creator)
+		# if 'username' not in login_session or creator.id != login_session['user_id']:
+		# 	flash("Please log in to continue.")
+		# 	return redirect(url_for('showLogin'))
+		if 'username' not in login_session or creator.id != login_session['user_id']:	
+			return render_template('task_notLoggedIn.html', items = items, service = service, creator = creator)
 		else:
 			return render_template('task.html', items = items, service = service, creator = creator)
 		 
@@ -268,9 +273,6 @@ def showTask(service_id):
 # Create a new Task item
 @app.route('/service/<int:service_id>/task/new/',methods=['GET','POST'])
 def newTaskItem(service_id):
-	if 'username' not in login_session:
-		flash("Please log in to continue.")
-		return redirect(url_for('showLogin'))
 	service = session.query(Service).filter_by(id = service_id).one()
 	if request.method == 'POST':
 			newItem = TaskItem(
@@ -287,11 +289,13 @@ def newTaskItem(service_id):
 # Edit a Task item
 @app.route('/service/<int:service_id>/task/<int:task_id>/edit', methods=['GET','POST'])
 def editTaskItem(service_id, task_id):
-		if 'username' not in login_session:
-			flash("Please log in to continue.")
-			return redirect(url_for('showLogin'))
+		
 		editedItem = session.query(TaskItem).filter_by(id = task_id).one()
 		service = session.query(Service).filter_by(id = service_id).one()
+		if 'username' not in login_session:
+			return redirect('showLogin')
+		if editedItem.user_id != login_session['user_id']:
+			flash("You can't edit this since you didn't create it.")	
 		if request.method == 'POST':
 				if request.form['name']:
 						editedItem.name = request.form['name']
@@ -317,7 +321,9 @@ def deleteTaskItem(service_id,task_id):
 		flash("Please log in to continue.")
 		return redirect(url_for('showLogin'))
 	service = session.query(Service).filter_by(id = service_id).one()
-	itemToDelete = session.query(TaskItem).filter_by(id = task_id).one() 
+	itemToDelete = session.query(TaskItem).filter_by(id = task_id).one()
+	if itemToDelete.user_id != login_session['user_id']:
+			flash("You can't delete this since you didn't create it.") 
 	if request.method == 'POST':
 		session.delete(itemToDelete)
 		session.commit()
