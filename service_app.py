@@ -212,6 +212,9 @@ def newService():
 			flash("Please log in to continue.")
 			return redirect(url_for('showLogin'))
 	if request.method == 'POST':
+		print login_session
+		if 'user_id' not in login_session and 'email' in login_session:
+			login_session['user_id'] = getUserID(login_session['email'])
 		newService = Service(name = request.form['name'],
 			user_id=login_session['user_id'])
 		session.add(newService)
@@ -228,7 +231,7 @@ def editService(service_id):
 		flash("Please login to continue")
 		return redirect(url_for('showLogin'))
 	editedService = session.query(Service).filter_by(id = service_id).one()
-	if login_session['user_id'] != editedService.user_id:
+	if editedService.user_id != login_session['user_id']:
 		return render_template('can_notEdit.html')
 	if request.method == 'POST' and login_session['user_id'] == editedService.user_id:
 			if request.form['name']:
@@ -263,6 +266,7 @@ def showTask(service_id):
 		# if 'username' not in login_session or creator.id != login_session['user_id']:
 		# 	flash("Please log in to continue.")
 		# 	return redirect(url_for('showLogin'))
+
 		if 'username' not in login_session or creator.id != login_session['user_id']:	
 			return render_template('task_notLoggedIn.html', items = items, service = service, creator = creator)
 		else:
