@@ -208,11 +208,10 @@ def showServices():
 # Create a new service
 @app.route('/service/new/', methods=['GET','POST'])
 def newService():
-	
-	if request.method == 'POST':
-		if 'username' not in login_session:
+	if 'username' not in login_session:
 			flash("Please log in to continue.")
 			return redirect(url_for('showLogin'))
+	if request.method == 'POST':
 		newService = Service(name = request.form['name'],
 			user_id=login_session['user_id'])
 		session.add(newService)
