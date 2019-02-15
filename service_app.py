@@ -231,13 +231,16 @@ def editService(service_id):
 		flash("Please login to continue")
 		return redirect(url_for('showLogin'))
 	editedService = session.query(Service).filter_by(id = service_id).one()
+
 	if editedService.user_id != login_session['user_id']:
 		return render_template('can_notEdit.html')
-	if request.method == 'POST' and login_session['user_id'] == editedService.user_id:
-			if request.form['name']:
-				editedService.name = request.form['name']
-				# flash('service Successfully Edited %s' % editedService.name)
-				return redirect(url_for('showServices'))
+	if request.method == 'POST':
+		print editedService.user_id
+		print login_session['user_id']
+		if request.form['name']:
+			editedService.name = request.form['name']
+			# flash('service Successfully Edited %s' % editedService.name)
+			return redirect(url_for('showServices'))
 	else:
 		#if editedService.user_id == login_session['user_id']:
 		return render_template('services_edit.html', service = editedService)
