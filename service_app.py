@@ -33,7 +33,7 @@ session = DBSession()
 @app.route('/login')
 def showLogin():
 	state = ''.join(random.choice(string.ascii_uppercase + string.digits)
-							for x in xrange(32))
+										for x in xrange(32))
 	login_session['state'] = state
 	return render_template('login.html', STATE=state)
 
@@ -62,7 +62,7 @@ def gconnect():
 	# Check that the access token is valid.
 	access_token = credentials.access_token
 	url = ('https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=%s'
-				% access_token)
+						% access_token)
 	h = httplib2.Http()
 	result = json.loads(h.request(url, 'GET')[1])
 	# If error in access token info, abort.
@@ -91,7 +91,7 @@ def gconnect():
 	stored_gplus_id = login_session.get('gplus_id')
 	if stored_access_token is not None and gplus_id == stored_gplus_id:
 		response = make_response(json.dumps('Current user is already connected.'),
-											200)
+													200)
 		response.headers['Content-Type'] = 'application/json'
 		return response
 		
@@ -157,10 +157,11 @@ def gdisconnect():
 		response = make_response(json.dumps('User not connected.'), 401)
 		response.headers['Content-Type'] = 'application/json'
 		return response
-	print 'In gdisconnect access token is %s',access_token
+	print 'In gdisconnect access token is %s', access_token
 	print 'User name is: '
 	print login_session['username']
-	url='https://accounts.google.com/o/oauth2/revoke?token=%s' % login_session['access_token']
+	url = 'https://accounts.google.com/o/oauth2/revoke?token=%s'
+			% login_session['access_token']
 	h = httplib2.Http()
 	result = h.request(url, 'GET')[0]
 	print 'result is '
@@ -194,6 +195,7 @@ def servicesJSON():
 		services = session.query(Service).all()
 		return jsonify(services= [service.serialize for service in services])
 
+
 # Show all services, different views per whether user is logged in or not
 @app.route('/')
 @app.route('/service/')
@@ -204,6 +206,7 @@ def showServices():
 	else:
 		
 		return render_template('show.html', services = services)
+
 
 # Create a new service
 @app.route('/service/new/', methods=['GET','POST'])
@@ -242,7 +245,7 @@ def editService(service_id):
 			# flash('service Successfully Edited %s' % editedService.name)
 			return redirect(url_for('showServices'))
 	else:
-		#if editedService.user_id == login_session['user_id']:
+		# if editedService.user_id == login_session['user_id']:
 		return render_template('services_edit.html', service = editedService)
 
 
@@ -259,6 +262,7 @@ def deleteService(service_id):
 		if creator.id == login_session['user_id']:
 			return render_template('serviceDelete.html',service = serviceToDelete)
 
+
 # Show a service Task
 @app.route('/service/<int:service_id>/')
 @app.route('/service/<int:service_id>/task/')
@@ -266,14 +270,13 @@ def showTask(service_id):
 		service = session.query(Service).filter_by(id = service_id).one()
 		creator = getUserInfo(service.user_id)
 		items = session.query(TaskItem).filter_by(service_id = service_id).all()
-		# if 'username' not in login_session or creator.id != login_session['user_id']:
-		# 	flash("Please log in to continue.")
-		# 	return redirect(url_for('showLogin'))
 
 		if 'username' not in login_session or creator.id != login_session['user_id']:	
-			return render_template('task_notLoggedIn.html', items = items, service = service, creator = creator)
+			return render_template('task_notLoggedIn.html', 
+							items = items, service = service, creator = creator)
 		else:
-			return render_template('task.html', items = items, service = service, creator = creator)
+			return render_template('task.html', 
+							items = items, service = service, creator = creator)
 		 
 
 # Create a new Task item
@@ -309,8 +312,7 @@ def editTaskItem(service_id, task_id):
 						editedItem.description = request.form['description']
 				if request.form['price']:
 						editedItem.price = request.form['price']
-				# if request.form['animal']:
-				# 		editedItem.course = request.form['animal']
+				
 				session.add(editedItem)
 				session.commit() 
 				flash('Task Item Successfully Edited')
@@ -333,7 +335,7 @@ def deleteTaskItem(service_id,task_id):
 	if request.method == 'POST':
 		session.delete(itemToDelete)
 		session.commit()
-		#flash('Task Item Successfully Deleted')
+		# flash('Task Item Successfully Deleted')
 		return redirect(url_for('showTask', service_id = service_id))
 	else:
 		return render_template('deleteTaskItem.html', item = itemToDelete)
